@@ -9,13 +9,10 @@
             canvas = document.getElementById('gameCanvas')
             canvasContext = canvas.getContext('2d')
             var fps = 30
-            setInterval(callBoth(),1000/fps)
-            
+            setInterval(function(){moveEverything()
+            drawEverything()},1000/fps)
         }
-        function callBoth(){
-            moveEverything()
-            drawEverything()
-        }
+        
         function moveEverything(){
             ballX = ballX + 5
         }
