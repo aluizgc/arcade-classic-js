@@ -8,7 +8,8 @@
         window.onload = function(){
             canvas = document.getElementById('gameCanvas')
             canvasContext = canvas.getContext('2d')
-            setInterval(drawEveryting,50)
+            var fps = 30
+            setInterval(drawEveryting,1000/fps)
             
         }
         function drawEveryting(){
