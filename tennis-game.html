@@ -5,7 +5,7 @@
         var canvas
         var canvasContext
         var ballX = 50
-        var ballSpeedX = 5
+        var ballSpeedX = 15
         window.onload = function(){
             canvas = document.getElementById('gameCanvas')
             canvasContext = canvas.getContext('2d')
@@ -23,10 +23,14 @@
         function drawEverything(){
             colorRect(0,0,canvas.width,canvas.height,'black')
             colorRect(0,250,10,100,'white')
-            canvasContext.fillStyle = 'red'
+            circle(ballX,150,10,'white')
+        }
+        function circle(centerX, centerY, r, dC){
+            canvasContext.fillStyle = dC
             canvasContext.beginPath()
-            canvasContext.arc(ballX,100,10,0,Math.PI*2,true)
+            canvasContext.arc(centerX,centerY,r,0,Math.PI*2,true)
             canvasContext.fill()
+
         }
         function colorRect(lx,ty,w,h,dC){
             canvasContext.fillStyle = dC
