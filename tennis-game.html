@@ -9,6 +9,8 @@
         var ballY = 300
         var ballSpeedY = 4
         var paddle1Y = 250
+        var paddle2Y = 250
+        const paddleThickness = 10
         const paddleHeight = 100
 
         function calculateMousePos(evt){
@@ -42,9 +44,9 @@
         function moveEverything(){
             ballX = ballX + ballSpeedX
             if ((ballX > canvas.width) || (ballX < 0)){
-                if (ballY > paddle1Y && ballY < paddle1Y+paddleHeight){
+                if ((ballY > paddle1Y && ballY < paddle1Y+paddleHeight)||(ballY > paddle2Y && ballY < paddle2Y + paddleHeight)){
                     ballSpeedX = - ballSpeedX
-                    ballSpeedY = - ballSpeedY
+                    //ballSpeedY = - ballSpeedY
                 }else{
                 ballReset()
             }
@@ -56,7 +58,8 @@
         }
         function drawEverything(){
             colorRect(0,0,canvas.width,canvas.height,'black')
-            colorRect(0,paddle1Y,10,paddleHeight,'white')
+            colorRect(0,paddle1Y,paddleThickness,paddleHeight,'white')
+            colorRect(canvas.width-paddleThickness,paddle2Y,paddleThickness,paddleHeight,'white')
             circle(ballX,ballY,10,'white')
         }
         function circle(centerX, centerY, r, dC){
