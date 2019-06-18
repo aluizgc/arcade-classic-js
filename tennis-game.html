@@ -43,14 +43,20 @@
         }
         function moveEverything(){
             ballX = ballX + ballSpeedX
-            if ((ballX > canvas.width) || (ballX < 0)){
-                if ((ballY > paddle1Y && ballY < paddle1Y+paddleHeight)||(ballY > paddle2Y && ballY < paddle2Y + paddleHeight)){
+            if (ballX > canvas.width){
+                if (ballY > paddle2Y && ballY < paddle2Y+paddleHeight){
                     ballSpeedX = - ballSpeedX
-                    //ballSpeedY = - ballSpeedY
+                    }else{
+                        ballReset()
+                    }
+                }
+                if (ballX < 0){
+                    if (ballY > paddle1Y && ballY < paddle1Y+paddleHeight){
+                    ballSpeedX = - ballSpeedX
+                    }
                 }else{
-                ballReset()
-            }
-            }
+                    ballReset()
+                }
             ballY = ballY + ballSpeedY
             if ((ballY > canvas.height) || (ballY < 0)){
                 ballSpeedY = -ballSpeedY
