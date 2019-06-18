@@ -31,14 +31,23 @@
             canvas.addEventListener('mousemove',
             function(evt){
                 var mousePos = calculateMousePos(evt)
-                paddle1Y = mousePos.y
+                paddle1Y = mousePos.y-paddleHeight/2
             })
         }
-        
+        function ballReset(){
+            ballX = canvas.width/2
+            ballY = canvas.height/2
+            ballSpeedX = -ballSpeedX
+        }
         function moveEverything(){
             ballX = ballX + ballSpeedX
             if ((ballX > canvas.width) || (ballX < 0)){
-                ballSpeedX = -ballSpeedX
+                if (ballY > paddle1Y && ballY < paddle1Y+paddleHeight){
+                    ballSpeedX = - ballSpeedX
+                    ballSpeedY = - ballSpeedY
+                }else{
+                ballReset()
+            }
             }
             ballY = ballY + ballSpeedY
             if ((ballY > canvas.height) || (ballY < 0)){
@@ -47,7 +56,7 @@
         }
         function drawEverything(){
             colorRect(0,0,canvas.width,canvas.height,'black')
-            colorRect(0,paddle1Y,10,100,'white')
+            colorRect(0,paddle1Y,10,paddleHeight,'white')
             circle(ballX,ballY,10,'white')
         }
         function circle(centerX, centerY, r, dC){
