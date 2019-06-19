@@ -95,6 +95,11 @@
                 ballSpeedY *= -1
             }
         }
+        function drawNet(){
+            for(var i=0;i<canvas.height;i+=40){
+                colorRect(canvas.width/2 - 1, i, 2,20,'white')
+            }
+        }
         function drawEverything(){
             colorRect(0,0,canvas.width,canvas.height,'black')
             if (showingWinScreen){
@@ -107,6 +112,7 @@
                 canvasContext.fillText("Clique para continuar", 350,500)
                 return
             }
+            drawNet()
             colorRect(0,paddle1Y,paddleThickness,paddleHeight,'white')
             colorRect(canvas.width-paddleThickness,paddle2Y,paddleThickness,paddleHeight,'white')
             circle(ballX,ballY,10,'white')
