@@ -10,6 +10,8 @@
         var ballSpeedY = 4
         var paddle1Y = 250
         var paddle2Y = 250
+        var score1 = 0
+        var score2 = 0
         const paddleThickness = 10
         const paddleHeight = 100
 
@@ -39,7 +41,7 @@
         function ballReset(){
             ballX = canvas.width/2
             ballY = canvas.height/2
-            ballSpeedX = -ballSpeedX
+            ballSpeedX *= -1
         }
         function computerMov(){
                 if(paddle2Y+(paddleHeight/2) < ballY-35){
@@ -50,24 +52,26 @@
         }
         function moveEverything(){
             computerMov()
-            ballX = ballX + ballSpeedX
-            ballY = ballY + ballSpeedY
+            ballX += ballSpeedX
+            ballY += ballSpeedY
             if (ballX < 0){
                 if (ballY > paddle1Y && ballY < paddle1Y+paddleHeight){
-                    ballSpeedX = -ballSpeedX
+                    ballSpeedX *= -1
                 } else {
                     ballReset()
+                    score2++
                 }
             }
             if (ballX > canvas.width){
                 if (ballY > paddle2Y && ballY < paddle2Y+paddleHeight){
-                    ballSpeedX = -ballSpeedX
+                    ballSpeedX *= -1
                 } else {
                     ballReset()
+                    score1++
                 }
             }
             if ((ballY > canvas.height) || (ballY < 0)){
-                ballSpeedY = -ballSpeedY
+                ballSpeedY *= -1
             }
         }
         function drawEverything(){
@@ -75,7 +79,10 @@
             colorRect(0,paddle1Y,paddleThickness,paddleHeight,'white')
             colorRect(canvas.width-paddleThickness,paddle2Y,paddleThickness,paddleHeight,'white')
             circle(ballX,ballY,10,'white')
+            canvasContext.fillText(score1, 100,100)
+            canvasContext.fillText(score2, canvas.width-100,100)
         }
+        
         function circle(centerX, centerY, r, dC){
             canvasContext.fillStyle = dC
             canvasContext.beginPath()
