@@ -33,7 +33,7 @@
             canvas.addEventListener('mousemove',
             function(evt){
                 var mousePos = calculateMousePos(evt)
-                paddle2Y = mousePos.y-paddleHeight/2
+                paddle1Y = mousePos.y-paddleHeight/2
             })
         }
         function ballReset(){
@@ -41,7 +41,15 @@
             ballY = canvas.height/2
             ballSpeedX = -ballSpeedX
         }
+        function computerMov(){
+                if(paddle2Y+(paddleHeight/2) < ballY-35){
+                    paddle2Y += 6
+                }else if (paddle2Y+ (paddleHeight/2) > ballY+35){
+                    paddle2Y -= 6
+                }
+        }
         function moveEverything(){
+            computerMov()
             ballX = ballX + ballSpeedX
             ballY = ballY + ballSpeedY
             if (ballX < 0){
