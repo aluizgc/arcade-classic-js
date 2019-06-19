@@ -26,7 +26,13 @@
                 x : mouseX,
                 y : mouseY
             }
-            
+        }
+        function handleMouseClick(evt){
+            if(showingWinScreen){
+                score1 = 0
+                score2 = 0
+                showingWinScreen = false
+            }
         }
         window.onload = function(){
             canvas = document.getElementById('gameCanvas')
@@ -34,6 +40,8 @@
             var fps = 30
             setInterval(function(){moveEverything()
             drawEverything()},1000/fps)
+            canvas.addEventListener('mousedown', handleMouseClick)
+
             canvas.addEventListener('mousemove',
             function(evt){
                 var mousePos = calculateMousePos(evt)
@@ -42,8 +50,6 @@
         }
         function ballReset(){
             if (score1 >= winning_score || score2 >= winning_score){
-                score1 = 0
-                score2 = 0
                 showingWinScreen = true
             }
             ballX = canvas.width/2
@@ -93,7 +99,12 @@
             colorRect(0,0,canvas.width,canvas.height,'black')
             if (showingWinScreen){
                 canvasContext.fillStyle = 'white'
-                canvasContext.fillText("Clique para continuar", 100,100)
+                if (score1 >= winning_score){
+                    canvasContext.fillText("Player 1 ganhou!",350,200)
+                }else if (score2 >= winning_score){
+                    canvasContext.fillText("Player 2 ganhou!",350,200)
+                }
+                canvasContext.fillText("Clique para continuar", 350,500)
                 return
             }
             colorRect(0,paddle1Y,paddleThickness,paddleHeight,'white')
